@@ -1,0 +1,26 @@
+<html>
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
+<script>
+      $(document).ready(function(){
+        var dirname
+        $("#submit").click(function(){
+          dirname=$("#dirname").val();
+         
+          $.post("http://localhost:8080/dossiers",{dirname: dirname}, function(data){
+            if(data === 'yes') {
+                alert("directory created");
+              }
+          });
+        });
+      });
+    </script>
+</head>
+<body>
+<h1>Hello people !</h1>
+
+<input id="dirname" size="40" type="DIRNAME" />
+<input id="submit" type="button" value="Submit" />
+
+</body>
+</html>

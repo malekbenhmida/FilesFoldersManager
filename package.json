@@ -1,0 +1,17 @@
+{
+  "name": "back-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "express": "^4.17.3",
+    "mv": "^2.1.1",
+    "react-scripts": "^5.0.0"
+  }
+}
