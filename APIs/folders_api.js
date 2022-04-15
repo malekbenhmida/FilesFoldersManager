@@ -3,6 +3,7 @@ const initFolderApi = (app, router) => {
     createDirectory,
     deleteDirectory,
     allDirs,
+    allContent,
     moveDirectory,
   } = require("../folders");
   const dir_path = "PUT_YOUR_PATH_HERE";
@@ -12,6 +13,20 @@ const initFolderApi = (app, router) => {
   app.get("/folders", (req, res) => {
     res.send(arrayOfDirectories);
   });
+
+  var contentListing = {
+    listContent: (res, folderName, dir) => {
+      const dirPath =
+          dir && dir !== "/"
+            ? dir_path + dir
+            : dir_path 
+      let arrayOfContent = allContent.getAllContentFromDir(
+        dirPath,
+        folderName
+      );
+      res.json(arrayOfContent);
+    },
+  };
 
   var folderCreation = {
     createNewFolder: (res, newFolderName, dir) => {
@@ -82,6 +97,17 @@ const initFolderApi = (app, router) => {
 
   module.exports = {
     folderCreation,
+
+    listFolderContent: router.get("/folderContent", (req, res) => {
+      const { name, dir } = req.body;
+      console.log(req.body);
+      if (!dir) {
+        contentListing.listContent(res, name);
+      } else {
+        contentListing.listContent(res, name, dir);
+      }
+    }),
+
     createFolder: router.post("/folder", (req, res) => {
       const { name, dir } = req.body;
       if (!dir) {

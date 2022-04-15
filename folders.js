@@ -26,9 +26,16 @@ var allDirs = {
   },
 };
 
+var allContent = {
+  getAllContentFromDir: function (dirPath, dirName, arrayOfContent) {
+     arrayOfContent = fs.readdirSync(dirPath + "/" + dirName) || [];
+    return arrayOfContent;
+  },
+};
+
 module.exports = {
   allDirs,
-
+  allContent,
   createDirectory: (newDirPath) => {
     if (fs.existsSync(newDirPath)) {
       const error = "This directory already exists!";
