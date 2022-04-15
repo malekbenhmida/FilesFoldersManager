@@ -28,7 +28,7 @@ var allDirs = {
 
 var allContent = {
   getAllContentFromDir: function (dirPath, dirName, arrayOfContent) {
-    let arrayOfContent = fs.readdirSync(dirPath + "/" + dirName) || [];
+     arrayOfContent = fs.readdirSync(dirPath + "/" + dirName) || [];
     return arrayOfContent;
   },
 };
