@@ -6,7 +6,7 @@ const initFolderApi = (app, router) => {
     allContent,
     moveDirectory,
   } = require("../folders");
-  const dir_path = "PUT_YOUR_PATH_HERE";
+  const dir_path = "C:/Users/Malek Ben Hmida/Desktop/testprojet";
 
   let arrayOfDirectories = allDirs.getAllDirectories(dir_path + "/");
 
@@ -16,14 +16,8 @@ const initFolderApi = (app, router) => {
 
   var contentListing = {
     listContent: (res, folderName, dir) => {
-      const dirPath =
-          dir && dir !== "/"
-            ? dir_path + dir
-            : dir_path 
-      let arrayOfContent = allContent.getAllContentFromDir(
-        dirPath,
-        folderName
-      );
+      const dirPath = dir && dir !== "/" ? dir_path + dir : dir_path;
+      let arrayOfContent = allContent.getAllContentFromDir(dirPath, folderName);
       res.json(arrayOfContent);
     },
   };
