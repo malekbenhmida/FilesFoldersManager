@@ -53,12 +53,33 @@ module.exports = {
   },
 
   deleteDirectory: (folderPath) => {
-    fs.rmdir(folderPath, (err) => {
-      if (err) {
-        throw err;
+    if (fs.existsSync(folderPath)) {
+      const files = fs.readdirSync(folderPath)
+      if (files.length > 0) {
+        files.forEach(function(filename) {
+          if (fs.statSync(folderPath + "/" + filename).isDirectory()) {
+            deleteDirectory(folderPath + "/" + filename)
+          } else {
+            fs.unlinkSync(folderPath + "/" + filename)
+          }
+        })
+        fs.rmdir(folderPath, (err) => {
+          if (err) {
+            throw err;
+          }
+        });
+      } else {
+        fs.rmdir(folderPath, (err) => {
+          if (err) {
+            throw err;
+          }
+        });
       }
-      console.log("Folder removed");
-    });
+
+    } else {
+      throw 'Directory path not found'
+    }
+    
   },
 
   moveDirectory: (currentDirectoryPath, newDirectoryPath) => {
