@@ -5,7 +5,7 @@ const initFolderApi = (app, router) => {
     allDirs,
     moveDirectory,
   } = require("../folders");
-  const dir_path = "C:/Users/Malek Ben Hmida/Desktop/testprojet";
+  const dir_path = "PUT_YOUR_PATH_HERE";
 
   let arrayOfDirectories = allDirs.getAllDirectories(dir_path + "/");
 

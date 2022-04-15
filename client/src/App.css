@@ -1,0 +1,52 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+i.fa-solid.fa-file-lines, i.fa-solid.fa-folder{
+  font-size:50px;
+  cursor: pointer;
+}
+
+i.fa-solid.fa-file-lines{
+  color:rgb(132, 126, 243)
+
+}
+i.fa-solid.fa-folder{
+  color:rgb(225, 171, 8);
+}
+
+div.item div{
+  display:flex;
+  flex-direction:column;
+}
+
+
+div.item{
+  display:inline-block!important;
+}
+
+.path{
+  border: 3px solid rgb(172, 164, 164);
+  border-radius:5px;
+  padding:15px;
+  margin:20px 0;
+  background-color:azure;
+  text-align: center;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 25px;
+  letter-spacing: 3px;
+  justify-items: center;
+}
+
+.path > p {
+  margin-bottom:0 !important;
+
+}
+.folder{
+  border: 3px solid #000;
+  border-radius:5px;
+  padding:15px;
+  margin:20px 0;
+}
+
+div.create_delbutton{
+  display:inline-block;
+}

@@ -1,6 +1,6 @@
 const initFileApi = (app, router) => {
   var { createFile, allFiles, deleteFile, moveFile } = require("../files");
-  const dir_path = "C:/Users/Malek Ben Hmida/Desktop/testprojet";
+  const dir_path = "PUT_YOUR_PATH_HERE";
 
   let arrayOfFiles = allFiles.getAllFiles(dir_path + "/");
 
