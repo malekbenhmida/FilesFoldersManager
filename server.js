@@ -9,7 +9,6 @@ const cors = require("cors");
 const PORT = process.env.PORT || 8080
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use("/", router);
 
 app.use(cors());
 
@@ -21,6 +20,8 @@ app.use((req, res, next) => {
     next();
   });
 
+app.use("/", router);
+ 
 app.listen(PORT, () => {
   console.log(`Serveur à l'écoute sur ${PORT}`);
 });

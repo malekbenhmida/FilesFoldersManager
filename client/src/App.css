@@ -13,6 +13,42 @@ i.fa-solid.fa-folder{
   color:rgb(225, 171, 8);
 }
 
+i.fa-solid.fa-trash-can{
+  color:rgb(124, 4, 4);
+  font-size: 20px;
+  cursor: pointer;
+  margin:10px;
+}
+i.fa-solid.fa-square-pen{
+  color:rgb(16, 4, 124);
+  font-size: 20px;
+  cursor: pointer;
+  margin:10px;
+}
+
+i.fa-solid.fa-folder-plus{
+  color:rgb(225, 171, 8);
+  font-size: 30px;
+  margin:0 20px;
+  cursor: pointer;
+
+}
+
+i.fa-solid.fa-file-circle-plus{
+  color:rgb(132, 126, 243);
+  font-size: 30px;
+  margin:0 20px;
+  cursor: pointer;
+}
+
+i.fa-solid.fa-house-chimney-window{
+  justify-items: flex-end;
+  width:100%;
+  text-align: right;
+  cursor: pointer;
+
+}
+
 div.item div{
   display:flex;
   flex-direction:column;
@@ -34,6 +70,9 @@ div.item{
   font-size: 25px;
   letter-spacing: 3px;
   justify-items: center;
+  display: flex;
+  flex-direction: row;
+  width:100%;
 }
 
 .path > p {
@@ -45,8 +84,47 @@ div.item{
   border-radius:5px;
   padding:15px;
   margin:20px 0;
+  text-align: center;
+}
+
+.create{
+  display:flex;
+  flex-direction: row;
+  margin-top:20px;
 }
 
 div.create_delbutton{
   display:inline-block;
+}
+
+div.input_foldername{
+  display:flex;
+  flex-direction: row;
+}
+
+div.input_foldername > input{
+  outline:none;
+  border:2px solid #ccc;
+  border-radius:5px;
+  margin:0 10px;
+}
+
+div.input_foldername  button.confirm{
+  background-color:rgb(7, 205, 20);
+  color:black;
+  padding:0 10px;
+  border:1.5px solid rgb(3, 120, 11);
+  border-radius:5px;
+  height:30px;
+  margin: 0 5px;
+}
+
+div.input_foldername  button.cancel{
+  background-color:rgb(235, 19, 48);
+  color:#fff;
+  padding:0 10px;
+  border:1.5px solid rgb(129, 4, 25);
+  border-radius:5px;
+  height:30px;
+  margin: 0 5px;
 }

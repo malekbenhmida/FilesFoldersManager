@@ -3,30 +3,15 @@ const initFolderApi = (app, router) => {
     createDirectory,
     deleteDirectory,
     allDirs,
-    allContent,
     moveDirectory,
   } = require("../folders");
-  const dir_path = "PUT_YOUR_PATH_HERE";
+  const dir_path = "DIR_PATH";
 
   let arrayOfDirectories = allDirs.getAllDirectories(dir_path + "/");
 
   app.get("/folders", (req, res) => {
     res.send(arrayOfDirectories);
   });
-
-  var contentListing = {
-    listContent: (res, folderName, dir) => {
-      const dirPath =
-          dir && dir !== "/"
-            ? dir_path + dir
-            : dir_path 
-      let arrayOfContent = allContent.getAllContentFromDir(
-        dirPath,
-        folderName
-      );
-      res.json(arrayOfContent);
-    },
-  };
 
   var folderCreation = {
     createNewFolder: (res, newFolderName, dir) => {
@@ -40,9 +25,9 @@ const initFolderApi = (app, router) => {
           name: newFolderName,
           dir,
         });
-        res.json(arrayOfDirectories);
+        res.status(200).json(arrayOfDirectories);
       } catch (err) {
-        res.status(409).send(err);
+        res.status(409).json({message: "error"})
       }
     },
   };
@@ -62,13 +47,13 @@ const initFolderApi = (app, router) => {
             ? dir_path + dir + "/" + folderName
             : dir_path + "/" + folderName;
         deleteDirectory(dirPath);
-        res.json(arrayOfDirectories);
+        res.status(204).json(arrayOfDirectories);
       } catch (err) {
-        res.status(204).send(err);
+        res.status(404).json({message:'error'});
       }
     },
   };
-
+   
   var folderMovement = {
     moveAfolder: (res, folderName, destinationPath, oldPath) => {
       if (destinationPath) {
@@ -85,53 +70,46 @@ const initFolderApi = (app, router) => {
             }
             return false;
           });
-          res.json(arrayOfDirectories);
+          res.status(200).json(arrayOfDirectories);
         } catch (err) {
-          res.status(409).send(err);
+          res.status(409).json({ message: 'error'});
         }
       } else {
-        res.status(409).send("you need to specify a destination path !");
+        res.status(409).json({message: "you need to specify a destination path !"});
       }
     },
   };
 
   module.exports = {
     folderCreation,
-
-    listFolderContent: router.get("/folderContent", (req, res) => {
-      const { name, dir } = req.body;
-      console.log(req.body);
-      if (!dir) {
-        contentListing.listContent(res, name);
-      } else {
-        contentListing.listContent(res, name, dir);
-      }
-    }),
-
     createFolder: router.post("/folder", (req, res) => {
       const { name, dir } = req.body;
       if (!dir) {
-        folderCreation.createNewFolder(res, name);
+        folderCreation.createNewFolder(res.status(400).json({message: 'error'}), name);
       } else {
-        folderCreation.createNewFolder(res, name, dir);
+        folderCreation.createNewFolder(res.status(200).json({message: 'Folder created'}), name, dir);
       }
     }),
 
     deleteFolder: router.delete("/folderDelete", (req, res) => {
       const { name, dir } = req.body;
       if (!dir) {
-        folderDeletion.deleteAFolder(res, name);
+        folderDeletion.deleteAFolder( res.status(400).json({message: 'error'})
+        , name);
+
       } else {
-        folderDeletion.deleteAFolder(res, name, dir);
+        folderDeletion.deleteAFolder(res.status(200).json({message: 'Folder removed'})
+        , name, dir);
+
       }
     }),
 
     moveFolder: router.put("/moveFolder", (req, res) => {
       const { name, dir, destination } = req.body;
       if (!dir) {
-        folderMovement.moveAfolder(res, name, destination);
+        folderMovement.moveAfolder(res.status(400).json({message: 'error'}), name, destination);
       } else {
-        folderMovement.moveAfolder(res, name, destination, dir);
+        folderMovement.moveAfolder(res.status(200).json({message: 'Foldet Moved'}), name, destination, dir);
       }
     }),
   };

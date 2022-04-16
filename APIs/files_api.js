@@ -1,6 +1,6 @@
 const initFileApi = (app, router) => {
   var { createFile, allFiles, deleteFile, moveFile } = require("../files");
-  const dir_path = "PUT_YOUR_PATH_HERE";
+  const dir_path ="DIR_PATH";
 
   let arrayOfFiles = allFiles.getAllFiles(dir_path + "/");
 
@@ -93,9 +93,9 @@ const initFileApi = (app, router) => {
     deleteFile: router.delete("/deleteFile", (req, res) => {
       const { name, dir } = req.body;
       if (!dir) {
-        fileDeletion.deleteAFile(res, name);
+        fileDeletion.deleteAFile(res.status(400).json({message: 'error'}), name);
       } else {
-        fileDeletion.deleteAFile(res, name, dir);
+        fileDeletion.deleteAFile(res.status(200).json({message: 'File removed'}), name, dir);
       }
     }),
 
