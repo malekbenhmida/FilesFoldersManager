@@ -1,6 +1,6 @@
 const initFileApi = (app, router) => {
   var { createFile, allFiles, deleteFile, moveFile } = require("../files");
-  const dir_path ="DIR_PATH";
+  const dir_path = "D:/Informatique/ESTIAM/Cours 4FULLBK-Advanced/Projet_BE2/ProjectTest";
 
   let arrayOfFiles = allFiles.getAllFiles(dir_path + "/");
 

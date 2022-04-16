@@ -128,3 +128,12 @@ div.input_foldername  button.cancel{
   height:30px;
   margin: 0 5px;
 }
+
+p.return_msg{
+  text-align:center;
+  border-radius:50px;
+  border:1.5px solid #000;
+  padding:5px 15px;
+  width:50%;
+  margin-left: 25%;
+}

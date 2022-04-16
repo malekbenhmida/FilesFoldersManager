@@ -15,6 +15,7 @@ function App() {
   const [destination, setDestination] = useState('')
   const [movefolderName, setMoveFolderName] = useState('')
   const [movefolderDir, setMoveFolderDir] = useState('')
+  const [msg, setMsg] = useState('')
 
   
   
@@ -58,9 +59,12 @@ function App() {
     axios.delete(`http://localhost:8080/folderDelete`, { data: { name: nameFolder, dir: dirFolder } })
       .then((response) => {
         console.log(response)
+        setMsg('Folder Deleted Successfully')
       })
       .catch(error => {
         console.log(error)
+        setMsg('Error')
+
       })
   }
 
@@ -69,9 +73,13 @@ function App() {
     axios.delete(`http://localhost:8080/deleteFile`, { data: { name: nameFile, dir: dirFile } })
       .then((response) => {
         console.log(response)
+        setMsg('File Deleted Successfully')
+
       })
       .catch(error => {
         console.log(error)
+        setMsg('Error')
+
       })
   }
 
@@ -84,10 +92,14 @@ function App() {
       .then((response) => {
         console.log(response)
         setOpenInput('')
+        setMsg('Folder Created Successfully')
+
 
       })
       .catch(error => {
         console.log(error)
+        setMsg('Error')
+
       })
   }
 
@@ -100,9 +112,13 @@ function App() {
       .then((response) => {
         console.log(response)
         setOpenInput('')
+        setMsg('File Created Successfully')
+
       })
       .catch(error => {
         console.log(error)
+        setMsg('Error')
+
       })
   }
 
@@ -117,10 +133,13 @@ function App() {
     .then((response) => {
       console.log(response)
       setMoveInput('')
+      setMsg('File Moved Successfully')
 
     })
     .catch(error => {
       console.log(error)
+      setMsg('Error')
+
     })
   }
   const moveFolder = (nameFolder,dirFolder)=>{ 
@@ -133,9 +152,13 @@ function App() {
     .then((response) => {
       console.log(response)
       setMoveInput('')
+      setMsg('Folder Moved Successfully')
+
     })
     .catch(error => {
       console.log(error)
+      setMsg('Folder Moved Successfully')
+
     })
   }
   return (
@@ -150,7 +173,9 @@ function App() {
             <button className="cancel"  onClick={() => setOpenInput('')} >Cancel</button>
           </div>
           <div  className="input_foldername" style={{ display: moveInput === 'moveFolder' || moveInput === 'moveFile' ? "block" : "none" }}>
-              <input list="list_dir"  placeholder={moveInput === 'moveFolder' ? "Move Folder To " : moveInput === 'moveFile' ? "Move File To" : null}  onChange={(e)=> setDestination(e.target.value)}  />
+             <i onClick={()=>document.getElementById('dir').value = ''} class="fa-solid fa-circle-xmark"></i>
+              
+              <input id="dir" list="list_dir"  placeholder={moveInput === 'moveFolder' ? "Move Folder To " : moveInput === 'moveFile' ? "Move File To" : null}  onChange={(e)=> setDestination(e.target.value)}  />
               <datalist id="list_dir">
               <option value="/"  ></option>
               {unique.map((item)=><>
@@ -206,6 +231,8 @@ function App() {
         )}
 
       </div>
+      
+      {msg === '' ? null : <p className="return_msg">{msg} <i onClick={()=>setMsg('')} class="fa-solid fa-circle-xmark"></i></p>}
     </div>
   );
 }
