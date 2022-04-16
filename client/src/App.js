@@ -183,12 +183,12 @@ function App() {
               </>)}
               </datalist>
               <button className="confirm" onClick={moveInput === 'moveFolder' ? () => moveFolder() : moveInput === 'moveFile' ? () => moveFile() : null} >Confirm</button>
-              <button className="cancel"  onClick={() => setMoveInput('')} >Cancel</button>
+              <button className="cancel"  onClick={()=>setMoveInput('')} >Cancel</button>
 
           </div>
               
         </div>
-      </div>
+      </div> 
       <div className="row">
         <div className="col-md-12 path">
           <p>Dir_Path{gotoFolder}</p>
@@ -232,7 +232,7 @@ function App() {
 
       </div>
       
-      {msg === '' ? null : <p className="return_msg">{msg} <i onClick={()=>setMsg('')} class="fa-solid fa-circle-xmark"></i></p>}
+      {msg === '' ? null : <p onClick={setTimeout(()=>setMsg(''),2000)} className={msg==='Error'? "error_msg": "success_msg"}>{msg} </p>}
     </div>
   );
 }
